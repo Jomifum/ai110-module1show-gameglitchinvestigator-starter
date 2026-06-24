@@ -65,4 +65,25 @@ A sample game on Normal difficulty (range 1–100), secret number 74:
 
 ## 🚀 Stretch Features
 
-- [ ] [If you choose to complete Challenge 4, describe the Enhanced UI changes here — a screenshot is optional]
+## Edge-Case Testing
+
+I used my AI assistant to generate pytest cases for edge-case inputs to `parse_guess`
+(decimals, negatives, non-numeric strings, empty input, and very large numbers). All
+tests pass:
+
+```
+===================================================================== test session starts =====================================================================
+platform win32 -- Python 3.12.10, pytest-9.1.1, pluggy-1.6.0 -- C:\Python312\python.exe
+collected 9 items
+
+test/test_game_logic.py::test_guess_higher_than_secret_says_lower PASSED                  [ 11%]
+test/test_game_logic.py::test_guess_lower_than_secret_says_higher PASSED                  [ 22%]
+test/test_game_logic.py::test_correct_guess_wins PASSED                                   [ 33%]
+test/test_game_logic.py::test_wrong_guess_subtracts_points PASSED                         [ 44%]
+test/test_game_logic.py::test_decimal_string_truncates_to_int PASSED                      [ 55%]
+test/test_game_logic.py::test_negative_number_is_parsed PASSED                            [ 66%]
+test/test_game_logic.py::test_non_numeric_string_returns_error PASSED                      [ 77%]
+test/test_game_logic.py::test_empty_string_returns_error PASSED                           [ 88%]
+test/test_game_logic.py::test_extremely_large_number_parses_without_crashing PASSED        [100%]
+====================================================================== 9 passed in 0.04s ======================================================================
+```

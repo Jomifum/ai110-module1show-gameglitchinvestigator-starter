@@ -28,11 +28,11 @@
 
 | Edge Case | Prompt Used | AI-Suggested Test | Did It Pass? | Your Reasoning |
 |-----------|-------------|-------------------|--------------|----------------|
-| | | | | |
-| | | | | |
-| | | | | |
-
----
+| Decimal "3.7" | "Generate pytest cases for parse_guess covering edge-case inputs... a decimal string '3.7' should return ok=True with value 3" | test_decimal_string_truncates_to_int | Yes | parse_guess uses int(float(raw)), so I wanted to confirm decimals truncate to an int predictably instead of crashing. |
+| Negative "-5" | (same prompt, covering all cases at once) | test_negative_number_is_parsed | Yes | Tests an out-of-range but technically valid integer to ensure parsing itself doesn't fail. |
+| Non-numeric "abc" | (same prompt) | test_non_numeric_string_returns_error | Yes | Confirms the function returns ok=False with an error message rather than throwing an exception. |
+| Empty "" | (same prompt) | test_empty_string_returns_error | Yes | A common accidental input that should be handled gracefully. |
+| Large "999999999" | (same prompt) | test_extremely_large_number_parses_without_crashing | Yes | Verifies very large but valid integers parse without overflow or crashing. |
 
 ## Linting & Style (SF9)
 
