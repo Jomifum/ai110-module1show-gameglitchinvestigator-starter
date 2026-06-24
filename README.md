@@ -23,21 +23,35 @@ It wrote the code, ran away, and now the game is unplayable.
    - Run `pytest` in your terminal.
    - Keep fixing until all tests pass!
 
-## 📝 Document Your Experience
+## Document Your Experience
 
-- [ ] Describe the game's purpose.
-- [ ] Detail which bugs you found.
-- [ ] Explain what fixes you applied.
+This project started as an AI-generated guessing game full of bugs. Acting as a
+"Game Glitch Investigator," I ran the app via Streamlit, reproduced and logged the
+glitches, then used an AI coding assistant to diagnose and repair them.
 
-## 📸 Demo Walkthrough
+Bugs found and fixed:
+- Reversed hints: a guess higher than the secret incorrectly said "Go HIGHER" instead
+  of "Go LOWER" (and vice versa).
+- A hidden string-comparison bug that converted the secret to text on even attempts,
+  breaking the guess comparison.
+- An inconsistent attempts counter that started at 1 but reset to 0, causing an
+  off-by-one in "Attempts left."
+- An erratic scoring bug where wrong guesses on even attempts added points instead of
+  subtracting them.
 
-Describe your fixed game in numbered steps so a reader can follow along without watching a video:
+I refactored the core logic out of app.py into logic_utils.py to separate UI from logic,
+then wrote pytest cases to verify each fix and guard against regressions.
 
-1. <!-- Describe this step -->
-2. <!-- Describe this step -->
-3. <!-- Describe this step -->
-4. <!-- Describe this step -->
-5. <!-- Add more steps as needed -->
+### Demo Walkthrough
+
+A sample game on Normal difficulty (range 1–100), secret number 74:
+
+1. User guesses 23 → "📈 Go HIGHER!" (below the secret)
+2. User guesses 50 → "📈 Go HIGHER!" (still below)
+3. User guesses 75 → "📉 Go LOWER!" (just above)
+4. User guesses 66 → "📈 Go HIGHER!"
+5. User guesses 70 → "📈 Go HIGHER!"
+6. User guesses 74 → "🎉 Correct!" — game ends with a win
 
 **Screenshot** *(optional)*: <!-- Insert a screenshot of your fixed, winning game here -->
 
